@@ -26,8 +26,7 @@ conversation_states = data['conversation_state']
 #     fetchUsers(participants)
 
 conversation_state = conversation_states[8]['conversation_state']
-
-user_map = fetchUsers(conversation_state['conversation']['participant_data'])
+user_map = {u'116957312546171844361': u'Kris', u'104948165872551677495': u'Mela'}
 events = conversation_state['event']
 
 out_events = []
@@ -49,9 +48,9 @@ for event in events:
 
     name = user_map[event['sender_id']['chat_id']]
     message = " ".join(message_parts)
-    date = datetime.datetime.fromtimestamp(float(event['timestamp'])/1000000)
+    date = int(float(event['timestamp'])/1000000)
     # print u'{2} {0}: {1}'.format(name, message, date)
-    out_event = {u'ts' : event['timestamp'], u'name' : name, u'message' : message}
+    out_event = {u'ts' : date, u'name' : name, u'message' : message}
     out_events.append(out_event)
 
 json_data.close()
